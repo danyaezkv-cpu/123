@@ -109,6 +109,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            min-height: 44px;
         }
         .live-track .live-badge {
             display: inline-block;
@@ -340,16 +341,11 @@
         </div>
     </div>
     
-    <!-- ===== LIVE ЛЕНТА ===== -->
+    <!-- ===== LIVE ЛЕНТА (БЕЗ "ОЖИДАЕМ") ===== -->
     <div class="live-track">
         <span class="live-badge">LIVE</span>
         <div class="track-scroll" id="trackScroll">
-            <span class="item">🎉 Ожидаем первых победителей...</span>
-            <span class="item">🎉 Ожидаем первых победителей...</span>
-            <span class="item">🎉 Ожидаем первых победителей...</span>
-            <span class="item">🎉 Ожидаем первых победителей...</span>
-            <span class="item">🎉 Ожидаем первых победителей...</span>
-            <span class="item">🎉 Ожидаем первых победителей...</span>
+            <!-- Здесь ничего нет, только реальные выигрыши -->
         </div>
     </div>
     
@@ -558,7 +554,6 @@
                 avatar.style.background = 'linear-gradient(135deg, #f7971e, #ffd200)';
             }
             
-            // Попап
             document.getElementById('popupName').textContent = userData.firstName + (userData.lastName ? ' ' + userData.lastName : '');
             document.getElementById('popupUsername').textContent = userData.username ? '@' + userData.username : 'Без username';
             document.getElementById('popupBalance').textContent = userData.stars;
@@ -586,14 +581,10 @@
                     span.innerHTML = '🎉 <span class="win">' + e.user_name + '</span> выиграл <span class="nft">' + e.nft_id + '</span>';
                     scroll.appendChild(span);
                 });
+                // Дублируем для бесконечной прокрутки
                 scroll.innerHTML = scroll.innerHTML + scroll.innerHTML;
-            } else {
-                const span = document.createElement('span');
-                span.className = 'item';
-                span.textContent = '🎉 Ожидаем первых победителей...';
-                scroll.appendChild(span);
-                scroll.appendChild(span.cloneNode(true));
             }
+            // Если событий нет — оставляем пустым
         }
         
         // ========== ОТКРЫТИЕ КЕЙСА ==========
