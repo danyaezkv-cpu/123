@@ -20,7 +20,6 @@
             overflow-x: hidden;
         }
         
-        /* ===== РАСШИРЕНИЕ НА 75% ===== */
         body {
             height: 75vh;
             max-height: 75vh;
@@ -28,7 +27,6 @@
             border-radius: 20px 20px 0 0;
         }
         
-        /* ===== ВЕРХНЯЯ ПАНЕЛЬ ===== */
         .top-bar {
             display: flex;
             justify-content: space-between;
@@ -105,7 +103,7 @@
             font-weight: 700;
         }
         
-        /* ===== LIVE ДОРОЖКА (КАК НА ФОТО) ===== */
+        /* ===== LIVE ДОРОЖКА ===== */
         .live-track {
             padding: 10px 16px;
             background: rgba(255,215,0,0.03);
@@ -170,7 +168,6 @@
             padding-bottom: 80px;
         }
         
-        /* ===== СЕТКА КЕЙСОВ ===== */
         .cases-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -193,22 +190,9 @@
             border-color: rgba(255,215,0,0.3);
         }
         
-        .case-item .case-icon {
-            font-size: 28px;
-            margin-bottom: 4px;
-        }
-        
-        .case-item .case-name {
-            font-size: 11px;
-            font-weight: 600;
-            color: rgba(255,255,255,0.9);
-        }
-        
-        .case-item .case-price {
-            font-size: 10px;
-            color: #ffd700;
-            margin-top: 2px;
-        }
+        .case-item .case-icon { font-size: 28px; margin-bottom: 4px; }
+        .case-item .case-name { font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.9); }
+        .case-item .case-price { font-size: 10px; color: #ffd700; margin-top: 2px; }
         
         .case-item .case-progress {
             width: 100%;
@@ -259,21 +243,10 @@
             font-weight: 500;
         }
         
-        .bottom-nav .tab.active {
-            color: #ffd700;
-        }
-        
-        .bottom-nav .tab .icon {
-            font-size: 20px;
-        }
-        
-        .bottom-nav .tab .label {
-            font-size: 9px;
-        }
-        
-        .bottom-nav .tab:hover {
-            background: rgba(255,255,255,0.05);
-        }
+        .bottom-nav .tab.active { color: #ffd700; }
+        .bottom-nav .tab .icon { font-size: 20px; }
+        .bottom-nav .tab .label { font-size: 9px; }
+        .bottom-nav .tab:hover { background: rgba(255,255,255,0.05); }
         
         /* ===== TOAST ===== */
         .toast {
@@ -293,17 +266,14 @@
             text-align: center;
         }
         
-        .toast.show {
-            display: block;
-            animation: slideUp 0.3s ease;
-        }
+        .toast.show { display: block; animation: slideUp 0.3s ease; }
         
         @keyframes slideUp {
             from { transform: translateX(-50%) translateY(20px); opacity: 0; }
             to { transform: translateX(-50%) translateY(0); opacity: 1; }
         }
         
-        /* ===== ПРОФИЛЬ (POPUP) ===== */
+        /* ===== ПРОФИЛЬ ===== */
         .profile-popup {
             position: fixed;
             top: 0;
@@ -318,9 +288,7 @@
             align-items: center;
         }
         
-        .profile-popup.show {
-            display: flex;
-        }
+        .profile-popup.show { display: flex; }
         
         .profile-popup .popup-content {
             background: linear-gradient(145deg, #1a1a2e, #2a2a4a);
@@ -346,11 +314,7 @@
             margin: 0 auto 16px;
         }
         
-        .profile-popup .popup-name {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
+        .profile-popup .popup-name { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
         
         .profile-popup .popup-stats {
             display: flex;
@@ -361,20 +325,9 @@
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
         
-        .profile-popup .popup-stats .stat {
-            text-align: center;
-        }
-        
-        .profile-popup .popup-stats .stat .num {
-            font-size: 22px;
-            font-weight: 700;
-            color: #ffd700;
-        }
-        
-        .profile-popup .popup-stats .stat .label {
-            font-size: 12px;
-            color: rgba(255,255,255,0.5);
-        }
+        .profile-popup .popup-stats .stat { text-align: center; }
+        .profile-popup .popup-stats .stat .num { font-size: 22px; font-weight: 700; color: #ffd700; }
+        .profile-popup .popup-stats .stat .label { font-size: 12px; color: rgba(255,255,255,0.5); }
         
         .profile-popup .close-popup {
             padding: 12px 40px;
@@ -387,23 +340,11 @@
             transition: background 0.2s;
         }
         
-        .profile-popup .close-popup:hover {
-            background: rgba(255,255,255,0.2);
-        }
+        .profile-popup .close-popup:hover { background: rgba(255,255,255,0.2); }
         
-        /* ===== СКРОЛЛ ===== */
-        ::-webkit-scrollbar {
-            width: 3px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: rgba(255,255,255,0.2);
-            border-radius: 10px;
-        }
+        ::-webkit-scrollbar { width: 3px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
     </style>
 </head>
 <body>
@@ -425,66 +366,58 @@
         </div>
     </div>
     
-    <!-- ===== LIVE ДОРОЖКА ===== -->
+    <!-- ===== LIVE ДОРОЖКА (РЕАЛЬНЫЕ ЛЮДИ) ===== -->
     <div class="live-track">
         <span class="live-badge">LIVE</span>
         <div class="track-scroll" id="trackScroll">
-            <span class="item">🎉 <span class="win">User123</span> выиграл <span class="nft">NFT#42069</span></span>
-            <span class="item">🎉 <span class="win">CryptoKing</span> выиграл <span class="nft">NFT#77777</span></span>
-            <span class="item">🎉 <span class="win">MoonWalker</span> выиграл <span class="nft">NFT#1337</span></span>
-            <span class="item">🎉 <span class="win">StarLord</span> выиграл <span class="nft">NFT#99999</span></span>
-            <span class="item">🎉 <span class="win">GiftMaster</span> выиграл <span class="nft">NFT#55555</span></span>
-            <span class="item">🎉 <span class="win">LuckyOne</span> выиграл <span class="nft">NFT#88888</span></span>
-            <!-- Дублируем для бесконечной прокрутки -->
-            <span class="item">🎉 <span class="win">User123</span> выиграл <span class="nft">NFT#42069</span></span>
-            <span class="item">🎉 <span class="win">CryptoKing</span> выиграл <span class="nft">NFT#77777</span></span>
-            <span class="item">🎉 <span class="win">MoonWalker</span> выиграл <span class="nft">NFT#1337</span></span>
-            <span class="item">🎉 <span class="win">StarLord</span> выиграл <span class="nft">NFT#99999</span></span>
-            <span class="item">🎉 <span class="win">GiftMaster</span> выиграл <span class="nft">NFT#55555</span></span>
-            <span class="item">🎉 <span class="win">LuckyOne</span> выиграл <span class="nft">NFT#88888</span></span>
+            <span class="item">🎉 <span class="win">Ожидаем первого победителя...</span></span>
+            <span class="item">🎉 <span class="win">Ожидаем первого победителя...</span></span>
+            <span class="item">🎉 <span class="win">Ожидаем первого победителя...</span></span>
+            <span class="item">🎉 <span class="win">Ожидаем первого победителя...</span></span>
+            <span class="item">🎉 <span class="win">Ожидаем первого победителя...</span></span>
+            <span class="item">🎉 <span class="win">Ожидаем первого победителя...</span></span>
         </div>
     </div>
     
-    <!-- ===== ОСНОВНОЙ КОНТЕНТ ===== -->
+    <!-- ===== КОНТЕНТ ===== -->
     <div class="content">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
             <span style="font-size:16px;font-weight:600;">🔥 Популярные кейсы</span>
             <span style="font-size:12px;color:rgba(255,255,255,0.4);">Смотреть все →</span>
         </div>
         
-        <!-- ===== СЕТКА КЕЙСОВ ===== -->
         <div class="cases-grid">
-            <div class="case-item">
+            <div class="case-item" onclick="openCase('67 Capsule', 5)">
                 <div class="case-icon">🎁</div>
                 <div class="case-name">67 Capsule</div>
                 <div class="case-price">⭐ 5 / 50000</div>
                 <div class="case-progress"><div class="fill" style="width:0.01%"></div></div>
             </div>
-            <div class="case-item">
+            <div class="case-item" onclick="openCase('Diamond Box', 10)">
                 <div class="case-icon">💎</div>
                 <div class="case-name">Diamond Box</div>
                 <div class="case-price">⭐ 10 / 1000</div>
                 <div class="case-progress"><div class="fill" style="width:1%"></div></div>
             </div>
-            <div class="case-item">
+            <div class="case-item" onclick="openCase('Gold Rush', 3)">
                 <div class="case-icon">🔥</div>
                 <div class="case-name">Gold Rush</div>
                 <div class="case-price">⭐ 3 / 500</div>
                 <div class="case-progress"><div class="fill" style="width:0.6%"></div></div>
             </div>
-            <div class="case-item">
+            <div class="case-item" onclick="openCase('Moon Box', 8)">
                 <div class="case-icon">🚀</div>
                 <div class="case-name">Moon Box</div>
                 <div class="case-price">⭐ 8 / 2500</div>
                 <div class="case-progress"><div class="fill" style="width:0.32%"></div></div>
             </div>
-            <div class="case-item">
+            <div class="case-item" onclick="openCase('Royal Chest', 2)">
                 <div class="case-icon">👑</div>
                 <div class="case-name">Royal Chest</div>
                 <div class="case-price">⭐ 2 / 100</div>
                 <div class="case-progress"><div class="fill" style="width:2%"></div></div>
             </div>
-            <div class="case-item">
+            <div class="case-item" onclick="openCase('Star Pack', 1)">
                 <div class="case-icon">🌟</div>
                 <div class="case-name">Star Pack</div>
                 <div class="case-price">⭐ 1 / 50</div>
@@ -509,7 +442,7 @@
         </button>
     </div>
     
-    <!-- ===== ПРОФИЛЬ (POPUP) ===== -->
+    <!-- ===== ПРОФИЛЬ ===== -->
     <div class="profile-popup" id="profilePopup">
         <div class="popup-content">
             <div class="popup-avatar">👤</div>
@@ -549,19 +482,13 @@
         function expandApp() {
             if (tg) {
                 tg.expand();
-                // Устанавливаем высоту 75% от экрана
                 const height = Math.floor(window.innerHeight * 0.75);
                 document.body.style.height = height + 'px';
                 document.body.style.maxHeight = height + 'px';
             }
         }
         
-        // Вызываем при загрузке
-        window.addEventListener('load', function() {
-            expandApp();
-        });
-        
-        // При изменении размера окна
+        window.addEventListener('load', function() { expandApp(); });
         window.addEventListener('resize', function() {
             if (tg) {
                 const height = Math.floor(window.innerHeight * 0.75);
@@ -578,12 +505,83 @@
             spins: 0
         };
         
+        // ========== ИМЯ РЕАЛЬНОГО ПОЛЬЗОВАТЕЛЯ ==========
+        let currentUserName = 'User';
+        
+        // Получаем имя из Telegram
+        if (tg && tg.initDataUnsafe?.user) {
+            currentUserName = tg.initDataUnsafe.user.first_name || 'User';
+            // Если есть фамилия — добавляем
+            if (tg.initDataUnsafe.user.last_name) {
+                currentUserName += ' ' + tg.initDataUnsafe.user.last_name;
+            }
+            // Обрезаем длинные имена
+            if (currentUserName.length > 20) {
+                currentUserName = currentUserName.substring(0, 18) + '…';
+            }
+        }
+        
         // ========== ОБНОВЛЕНИЕ UI ==========
         function updateUI() {
             document.getElementById('userStars').textContent = userData.stars;
             document.getElementById('popupStars').textContent = userData.stars;
             document.getElementById('popupNfts').textContent = userData.nfts.length;
             document.getElementById('popupGifts').textContent = userData.giftsReceived;
+            document.getElementById('popupName').textContent = currentUserName;
+        }
+        
+        // ========== LIVE ДОРОЖКА — ДОБАВЛЕНИЕ РЕАЛЬНОГО СОБЫТИЯ ==========
+        function addRealWin(userName, nftId) {
+            const scroll = document.getElementById('trackScroll');
+            const span = document.createElement('span');
+            span.className = 'item';
+            span.innerHTML = '🎉 <span class="win">' + userName + '</span> выиграл <span class="nft">' + nftId + '</span>';
+            scroll.appendChild(span);
+            
+            // Удаляем старые
+            while (scroll.children.length > 30) {
+                scroll.removeChild(scroll.firstChild);
+            }
+        }
+        
+        // ========== ОТКРЫТИЕ КЕЙСА ==========
+        function openCase(caseName, price) {
+            if (userData.stars < price) {
+                showToast('❌ Не хватает звёзд! Нужно: ' + price);
+                return;
+            }
+            
+            userData.stars -= price;
+            
+            // Шанс выигрыша NFT — 10%
+            const win = Math.random() < 0.1;
+            let result = '';
+            
+            if (win) {
+                const nftId = 'NFT#' + Math.floor(Math.random() * 90000 + 10000);
+                userData.nfts.push(nftId);
+                result = '🎉 ПОБЕДА! Ты выиграл ' + nftId + '!';
+                
+                // Добавляем в LIVE ленту (РЕАЛЬНЫЙ пользователь!)
+                addRealWin(currentUserName, nftId);
+                
+                // Отправляем в бота
+                if (tg) {
+                    try {
+                        tg.sendData(JSON.stringify({
+                            action: 'win_nft',
+                            user: currentUserName,
+                            nft: nftId,
+                            case: caseName
+                        }));
+                    } catch (e) { console.log(e); }
+                }
+            } else {
+                result = '😞 Не повезло! Попробуй ещё!';
+            }
+            
+            updateUI();
+            showToast(result);
         }
         
         // ========== ДОБАВИТЬ ЗВЁЗДЫ ==========
@@ -591,7 +589,6 @@
             userData.stars += 1;
             updateUI();
             showToast('⭐ +1 звезда!');
-            addLiveItem('Кто-то пополнил баланс! +1 ⭐');
         }
         
         // ========== ПОКУПКА ЗВЁЗД ==========
@@ -599,26 +596,9 @@
             showToast('🛒 Скоро здесь будет магазин звёзд!');
         }
         
-        // ========== LIVE ДОРОЖКА ==========
-        function addLiveItem(text) {
-            const scroll = document.getElementById('trackScroll');
-            const span = document.createElement('span');
-            span.className = 'item';
-            span.textContent = '🎉 ' + text;
-            scroll.appendChild(span);
-            
-            // Ограничиваем количество элементов
-            while (scroll.children.length > 30) {
-                scroll.removeChild(scroll.firstChild);
-            }
-        }
-        
         // ========== ПРОФИЛЬ ==========
         function openProfile() {
             document.getElementById('profilePopup').classList.add('show');
-            if (tg && tg.initDataUnsafe?.user) {
-                document.getElementById('popupName').textContent = tg.initDataUnsafe.user.first_name || 'User';
-            }
             updateUI();
         }
         
@@ -629,7 +609,6 @@
         document.getElementById('profilePopup').addEventListener('click', function(e) {
             if (e.target === this) closeProfile();
         });
-        
         document.getElementById('profileBtn').addEventListener('click', openProfile);
         
         // ========== ВКЛАДКИ ==========
@@ -641,8 +620,8 @@
                 const tabName = this.dataset.tab;
                 if (tabName === 'profile') {
                     openProfile();
-                } else {
-                    showToast('📂 Вкладка "' + this.querySelector('.label').textContent + '"');
+                } else if (tabName === 'modes') {
+                    showToast('⚡ Режимы скоро появятся!');
                 }
             });
         });
@@ -662,15 +641,13 @@
         // ========== ИНИЦИАЛИЗАЦИЯ ==========
         updateUI();
         
-        // Добавляем случайные события в LIVE дорожку
-        const names = ['CryptoKing', 'MoonWalker', 'StarLord', 'GiftMaster', 'LuckyOne', 'NFTHunter', 'DiamondHands'];
-        setInterval(() => {
-            const name = names[Math.floor(Math.random() * names.length)];
-            const nftId = 'NFT#' + Math.floor(Math.random() * 90000 + 10000);
-            addLiveItem(name + ' выиграл ' + nftId);
-        }, 6000);
+        // Добавляем тестовое сообщение о старте
+        setTimeout(() => {
+            addRealWin(currentUserName, '⭐ ' + userData.stars + ' звёзд на старте!');
+        }, 2000);
         
         console.log('Easy Gift Mini App loaded!');
+        console.log('Пользователь:', currentUserName);
     </script>
 </body>
 </html>
