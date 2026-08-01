@@ -321,4 +321,301 @@
             <div class="case-item" onclick="openCase('Star Pack', 1)">
                 <div class="case-icon">🌟</div>
                 <div class="case-name">Star Pack</div>
-                <div class="case-price">⭐ 
+                <div class="case-price">⭐ 1 / 50</div>
+                <div class="case-progress"><div class="fill" style="width:2%"></div></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ===== НИЖНЯЯ ПАНЕЛЬ ===== -->
+    <div class="bottom-nav">
+        <button class="tab active" data-tab="cases">
+            <span class="icon">📦</span>
+            <span class="label">Кейсы</span>
+        </button>
+        <button class="tab" data-tab="modes">
+            <span class="icon">⚡</span>
+            <span class="label">Режимы</span>
+        </button>
+        <button class="tab" data-tab="profile">
+            <span class="icon">👤</span>
+            <span class="label">Профиль</span>
+        </button>
+    </div>
+    
+    <!-- ===== ПРОФИЛЬ ===== -->
+    <div class="profile-popup" id="profilePopup">
+        <div class="popup-content">
+            <div class="popup-avatar">👤</div>
+            <div class="popup-name" id="popupName">User</div>
+            <div class="popup-stats">
+                <div class="stat">
+                    <div class="num" id="popupStars">0</div>
+                    <div class="label">⭐ Звёзд</div>
+                </div>
+                <div class="stat">
+                    <div class="num" id="popupNfts">0</div>
+                    <div class="label">🖼 NFT</div>
+                </div>
+                <div class="stat">
+                    <div class="num" id="popupGifts">0</div>
+                    <div class="label">🎁 Гифтов</div>
+                </div>
+            </div>
+            <button class="close-popup" onclick="closeProfile()">Закрыть</button>
+        </div>
+    </div>
+    
+    <!-- ===== TOAST ===== -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // ========== TELEGRAM WEB APP ==========
+        let tg = window.Telegram?.WebApp;
+        
+        if (tg) {
+            tg.ready();
+            tg.expand();
+            tg.enableClosingConfirmation();
+        }
+        
+        // ========== РАСШИРЕНИЕ НА 75% ==========
+        function expandApp() {
+            if (tg) {
+                tg.expand();
+                const height = Math.floor(window.innerHeight * 0.75);
+                document.body.style.height = height + 'px';
+                document.body.style.maxHeight = height + 'px';
+            }
+        }
+        window.addEventListener('load', function() { expandApp(); });
+        window.addEventListener('resize', function() {
+            if (tg) {
+                const height = Math.floor(window.innerHeight * 0.75);
+                document.body.style.height = height + 'px';
+                document.body.style.maxHeight = height + 'px';
+            }
+        });
+        
+        // ========== ПОЛЬЗОВАТЕЛЬСКИЕ ДАННЫЕ ==========
+        let userData = {
+            stars: 0,
+            nfts: [],
+            giftsReceived: 0
+        };
+        
+        let currentUserName = 'User';
+        if (tg && tg.initDataUnsafe?.user) {
+            currentUserName = tg.initDataUnsafe.user.first_name || 'User';
+            if (tg.initDataUnsafe.user.last_name) {
+                currentUserName += ' ' + tg.initDataUnsafe.user.last_name;
+            }
+            if (currentUserName.length > 20) {
+                currentUserName = currentUserName.substring(0, 18) + '…';
+            }
+        }
+        
+        // ========== ЗАПРОС ДАННЫХ У БОТА ==========
+        function fetchUserData() {
+            if (tg) {
+                tg.sendData(JSON.stringify({
+                    action: 'get_user_data'
+                }));
+            }
+        }
+        
+        function fetchLiveFeed() {
+            if (tg) {
+                tg.sendData(JSON.stringify({
+                    action: 'get_live_feed'
+                }));
+            }
+        }
+        
+        // ========== ОБРАБОТКА ОТВЕТОВ ОТ БОТА ==========
+        // Это глобальная функция, которую бот вызывает
+        window.handleBotResponse = function(data) {
+            try {
+                // Если это пользовательские данные
+                if (data.balance !== undefined) {
+                    userData.stars = data.balance;
+                    userData.nfts = data.nfts || [];
+                    userData.giftsReceived = data.gifts_received || 0;
+                    updateUI();
+                }
+                
+                // Если это LIVE лента
+                if (data.live_feed) {
+                    updateLiveFeed(data.live_feed);
+                }
+                
+                // Если это результат открытия кейса
+                if (data.status === 'win') {
+                    userData.stars = data.balance;
+                    if (data.nft) {
+                        userData.nfts.push(data.nft);
+                    }
+                    updateUI();
+                    showToast('🎉 Ты выиграл ' + data.nft + '!');
+                    fetchLiveFeed(); // Обновляем LIVE ленту
+                } else if (data.status === 'lose') {
+                    userData.stars = data.balance;
+                    updateUI();
+                    showToast('😞 Не повезло! Попробуй ещё!');
+                } else if (data.status === 'gift') {
+                    userData.stars = data.balance;
+                    updateUI();
+                    showToast('🎁 Подарок получен! +1 звезда!');
+                } else if (data.status === 'error') {
+                    showToast('❌ ' + data.message);
+                }
+            } catch(e) {
+                console.log('Ошибка обработки ответа:', e);
+            }
+        };
+        
+        // ========== ОБНОВЛЕНИЕ UI ==========
+        function updateUI() {
+            document.getElementById('userStars').textContent = userData.stars;
+            document.getElementById('popupStars').textContent = userData.stars;
+            document.getElementById('popupNfts').textContent = userData.nfts.length;
+            document.getElementById('popupGifts').textContent = userData.giftsReceived;
+            document.getElementById('popupName').textContent = currentUserName;
+        }
+        
+        // ========== ОБНОВЛЕНИЕ LIVE ЛЕНТЫ ==========
+        function updateLiveFeed(events) {
+            const scroll = document.getElementById('trackScroll');
+            scroll.innerHTML = '';
+            
+            if (events && events.length > 0) {
+                events.forEach(function(event) {
+                    const span = document.createElement('span');
+                    span.className = 'item';
+                    span.innerHTML = '🎉 <span class="win">' + event.user_name + '</span> выиграл <span class="nft">' + event.nft_id + '</span>';
+                    scroll.appendChild(span);
+                });
+                
+                // Дублируем для бесконечной прокрутки
+                const items = scroll.innerHTML;
+                scroll.innerHTML = items + items;
+            } else {
+                // Если нет событий
+                const span = document.createElement('span');
+                span.className = 'item';
+                span.textContent = '🎉 Ожидаем первых победителей...';
+                scroll.appendChild(span);
+                scroll.appendChild(span.cloneNode(true));
+            }
+        }
+        
+        // ========== ОТКРЫТИЕ КЕЙСА ==========
+        function openCase(caseName, price) {
+            if (userData.stars < price) {
+                showToast('❌ Не хватает звёзд! Нужно: ' + price);
+                return;
+            }
+            
+            if (tg) {
+                tg.sendData(JSON.stringify({
+                    action: 'open_case',
+                    case: caseName,
+                    price: price
+                }));
+            }
+        }
+        
+        // ========== ДОБАВИТЬ ЗВЁЗДЫ (ТЕСТ) ==========
+        function addStars() {
+            if (tg) {
+                tg.sendData(JSON.stringify({
+                    action: 'get_gift'
+                }));
+            }
+        }
+        
+        // ========== ПОКУПКА ЗВЁЗД ==========
+        function buyStars() {
+            showToast('🛒 Скоро здесь будет магазин звёзд!');
+        }
+        
+        // ========== ПРОФИЛЬ ==========
+        function openProfile() {
+            document.getElementById('profilePopup').classList.add('show');
+            updateUI();
+        }
+        
+        function closeProfile() {
+            document.getElementById('profilePopup').classList.remove('show');
+        }
+        
+        document.getElementById('profilePopup').addEventListener('click', function(e) {
+            if (e.target === this) closeProfile();
+        });
+        document.getElementById('profileBtn').addEventListener('click', openProfile);
+        
+        // ========== ВКЛАДКИ ==========
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                const tabName = this.dataset.tab;
+                if (tabName === 'profile') {
+                    openProfile();
+                } else if (tabName === 'modes') {
+                    showToast('⚡ Режимы скоро появятся!');
+                }
+            });
+        });
+        
+        // ========== TOAST ==========
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+        
+        // ========== ПЕРЕХВАТ СООБЩЕНИЙ ОТ БОТА ==========
+        // Telegram отправляет ответы от бота как обычные сообщения
+        // Мы перехватываем их и обрабатываем
+        if (tg) {
+            // Сохраняем оригинальный обработчик
+            const originalOnEvent = tg.onEvent;
+            
+            // Переопределяем обработчик событий
+            tg.onEvent('message', function(message) {
+                try {
+                    const data = JSON.parse(message.text);
+                    if (typeof data === 'object') {
+                        window.handleBotResponse(data);
+                        return;
+                    }
+                } catch(e) {
+                    // Это не JSON, игнорируем
+                }
+            });
+        }
+        
+        // ========== ИНИЦИАЛИЗАЦИЯ ==========
+        // Запрашиваем данные при загрузке
+        setTimeout(function() {
+            fetchUserData();
+            fetchLiveFeed();
+        }, 500);
+        
+        // Обновляем LIVE ленту каждые 30 секунд
+        setInterval(function() {
+            fetchLiveFeed();
+        }, 30000);
+        
+        console.log('Easy Gift Mini App loaded!');
+        console.log('Пользователь:', currentUserName);
+    </script>
+</body>
+</html>
