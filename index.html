@@ -325,7 +325,7 @@
             <div class="profile-avatar" id="avatarContainer">👤</div>
             <div class="profile-info">
                 <div class="profile-name" id="profileName">Загрузка...</div>
-                <div class="profile-username" id="profileUsername">@username</div>
+                <div class="profile-username" id="profileUsername"></div>
             </div>
             <div class="stars-info">
                 ⭐ <strong id="userStars">0</strong>
@@ -415,7 +415,7 @@
         <div class="popup-content">
             <div class="popup-avatar" id="popupAvatar">👤</div>
             <div class="popup-name" id="popupName">User</div>
-            <div class="popup-username" id="popupUsername">@username</div>
+            <div class="popup-username" id="popupUsername"></div>
             
             <div class="popup-stats">
                 <div class="stat">
@@ -479,8 +479,7 @@
             nfts: [],
             nftCount: 0,
             username: '',
-            firstName: 'User',
-            lastName: '',
+            displayName: 'User',
             photoUrl: null
         };
         
@@ -508,8 +507,7 @@
                     userData.nfts = data.nfts || [];
                     userData.nftCount = data.nft_count || 0;
                     userData.username = data.username || '';
-                    userData.firstName = data.first_name || 'User';
-                    userData.lastName = data.last_name || '';
+                    userData.displayName = data.display_name || 'User';
                     userData.photoUrl = data.photo_url || null;
                     updateUI();
                 }
@@ -540,26 +538,23 @@
         
         // ========== ОБНОВЛЕНИЕ UI ==========
         function updateUI() {
-            // Полное имя
-            const fullName = userData.firstName + (userData.lastName ? ' ' + userData.lastName : '');
-            
             // Верхняя панель
             document.getElementById('userStars').textContent = userData.stars;
-            document.getElementById('profileName').textContent = fullName;
-            document.getElementById('profileUsername').textContent = userData.username ? '@' + userData.username : 'Без username';
+            document.getElementById('profileName').textContent = userData.displayName;
+            document.getElementById('profileUsername').textContent = userData.username ? '@' + userData.username : '';
             
             // Аватарка в верхней панели
             const avatar = document.getElementById('avatarContainer');
             if (userData.photoUrl) {
                 avatar.innerHTML = '<img src="' + userData.photoUrl + '" alt="avatar">';
             } else {
-                avatar.textContent = userData.firstName.charAt(0).toUpperCase();
+                avatar.textContent = userData.displayName.charAt(0).toUpperCase();
                 avatar.style.background = 'linear-gradient(135deg, #f7971e, #ffd200)';
             }
             
             // Попап профиля
-            document.getElementById('popupName').textContent = fullName;
-            document.getElementById('popupUsername').textContent = userData.username ? '@' + userData.username : 'Без username';
+            document.getElementById('popupName').textContent = userData.displayName;
+            document.getElementById('popupUsername').textContent = userData.username ? '@' + userData.username : '';
             document.getElementById('popupBalance').textContent = userData.stars;
             document.getElementById('popupEarned').textContent = userData.totalEarned;
             document.getElementById('popupNfts').textContent = userData.nftCount;
@@ -571,7 +566,7 @@
             if (userData.photoUrl) {
                 popupAvatar.innerHTML = '<img src="' + userData.photoUrl + '" alt="avatar">';
             } else {
-                popupAvatar.textContent = userData.firstName.charAt(0).toUpperCase();
+                popupAvatar.textContent = userData.displayName.charAt(0).toUpperCase();
                 popupAvatar.style.background = 'linear-gradient(135deg, #f7971e, #ffd200)';
             }
         }
