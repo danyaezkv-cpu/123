@@ -325,7 +325,7 @@
             <div class="profile-avatar" id="avatarContainer">👤</div>
             <div class="profile-info">
                 <div class="profile-name" id="profileName">Загрузка...</div>
-                <div class="profile-username" id="profileUsername">@username</div>
+                <div class="profile-username" id="profileUsername">Имя пользователя</div>
             </div>
             <div class="stars-info">
                 ⭐ <strong id="userStars">0</strong>
@@ -341,12 +341,10 @@
         </div>
     </div>
     
-    <!-- ===== LIVE ЛЕНТА (БЕЗ "ОЖИДАЕМ") ===== -->
+    <!-- ===== LIVE ЛЕНТА ===== -->
     <div class="live-track">
         <span class="live-badge">LIVE</span>
-        <div class="track-scroll" id="trackScroll">
-            <!-- Здесь ничего нет, только реальные выигрыши -->
-        </div>
+        <div class="track-scroll" id="trackScroll"></div>
     </div>
     
     <!-- ===== КОНТЕНТ ===== -->
@@ -417,7 +415,7 @@
         <div class="popup-content">
             <div class="popup-avatar" id="popupAvatar">👤</div>
             <div class="popup-name" id="popupName">User</div>
-            <div class="popup-username" id="popupUsername">@username</div>
+            <div class="popup-username" id="popupUsername">Имя пользователя</div>
             
             <div class="popup-stats">
                 <div class="stat">
@@ -542,10 +540,12 @@
         
         // ========== ОБНОВЛЕНИЕ UI ==========
         function updateUI() {
+            // Верхняя панель
             document.getElementById('userStars').textContent = userData.stars;
-            document.getElementById('profileName').textContent = userData.firstName + (userData.lastName ? ' ' + userData.lastName : '');
+            document.getElementById('profileName').textContent = userData.firstName;
             document.getElementById('profileUsername').textContent = userData.username ? '@' + userData.username : 'Без username';
             
+            // Аватарка в верхней панели
             const avatar = document.getElementById('avatarContainer');
             if (userData.photoUrl) {
                 avatar.innerHTML = '<img src="' + userData.photoUrl + '" alt="avatar">';
@@ -554,7 +554,8 @@
                 avatar.style.background = 'linear-gradient(135deg, #f7971e, #ffd200)';
             }
             
-            document.getElementById('popupName').textContent = userData.firstName + (userData.lastName ? ' ' + userData.lastName : '');
+            // Попап профиля
+            document.getElementById('popupName').textContent = userData.firstName;
             document.getElementById('popupUsername').textContent = userData.username ? '@' + userData.username : 'Без username';
             document.getElementById('popupBalance').textContent = userData.stars;
             document.getElementById('popupEarned').textContent = userData.totalEarned;
@@ -562,11 +563,13 @@
             document.getElementById('popupGifts').textContent = userData.giftsReceived;
             document.getElementById('popupSpent').textContent = userData.totalSpent;
             
+            // Аватарка в попапе
             const popupAvatar = document.getElementById('popupAvatar');
             if (userData.photoUrl) {
                 popupAvatar.innerHTML = '<img src="' + userData.photoUrl + '" alt="avatar">';
             } else {
                 popupAvatar.textContent = userData.firstName.charAt(0).toUpperCase();
+                popupAvatar.style.background = 'linear-gradient(135deg, #f7971e, #ffd200)';
             }
         }
         
@@ -581,10 +584,8 @@
                     span.innerHTML = '🎉 <span class="win">' + e.user_name + '</span> выиграл <span class="nft">' + e.nft_id + '</span>';
                     scroll.appendChild(span);
                 });
-                // Дублируем для бесконечной прокрутки
                 scroll.innerHTML = scroll.innerHTML + scroll.innerHTML;
             }
-            // Если событий нет — оставляем пустым
         }
         
         // ========== ОТКРЫТИЕ КЕЙСА ==========
