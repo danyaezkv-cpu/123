@@ -20,6 +20,7 @@
             overflow-y: auto;
             border-radius: 20px 20px 0 0;
         }
+        
         .top-bar {
             display: flex;
             justify-content: space-between;
@@ -32,25 +33,64 @@
             z-index: 100;
             backdrop-filter: blur(10px);
         }
-        .top-bar .left { display: flex; align-items: center; gap: 10px; }
-        .top-bar .profile {
-            width: 36px; height: 36px; border-radius: 50%;
-            background: linear-gradient(135deg, #f7971e, #ffd200);
-            display: flex; align-items: center; justify-content: center;
-            font-weight: 700; font-size: 16px; color: #000;
-            cursor: pointer; transition: transform 0.2s;
+        .top-bar .left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
         }
-        .top-bar .profile:hover { transform: scale(1.05); }
-        .top-bar .stars-info { font-size: 14px; color: rgba(255,255,255,0.8); }
+        .top-bar .profile-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f7971e, #ffd200);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+            color: #000;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        .top-bar .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .top-bar .profile-info {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+        .top-bar .profile-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: white;
+        }
+        .top-bar .profile-username {
+            font-size: 11px;
+            color: rgba(255,255,255,0.4);
+        }
+        .top-bar .stars-info {
+            font-size: 13px;
+            color: rgba(255,255,255,0.8);
+            margin-left: auto;
+            padding-left: 10px;
+        }
         .top-bar .stars-info strong { color: #ffd700; }
-        .top-bar .right { display: flex; align-items: center; gap: 8px; }
+        .top-bar .right {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
         .top-bar .icon-btn {
             background: rgba(255,255,255,0.08);
             border: 1px solid rgba(255,255,255,0.1);
             border-radius: 10px;
-            padding: 6px 12px;
+            padding: 5px 10px;
             color: white;
-            font-size: 14px;
+            font-size: 13px;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -189,72 +229,105 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(10px);
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(15px);
             z-index: 300;
             display: none;
             justify-content: center;
             align-items: center;
+            padding: 20px;
         }
         .profile-popup.show { display: flex; }
         .profile-popup .popup-content {
             background: linear-gradient(145deg, #1a1a2e, #2a2a4a);
-            border-radius: 24px;
-            padding: 32px;
-            max-width: 340px;
-            width: 90%;
+            border-radius: 28px;
+            padding: 32px 24px;
+            max-width: 360px;
+            width: 100%;
             text-align: center;
             border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
         }
         .profile-popup .popup-avatar {
-            width: 80px; height: 80px; border-radius: 50%;
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
             background: linear-gradient(135deg, #f7971e, #ffd200);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 32px; font-weight: 700; color: #000;
-            margin: 0 auto 16px;
-        }
-        .profile-popup .popup-name { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
-        .profile-popup .popup-stats {
             display: flex;
-            justify-content: space-around;
-            margin: 20px 0;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            font-weight: 700;
+            color: #000;
+            margin: 0 auto 12px;
+            overflow: hidden;
+            border: 3px solid rgba(255,215,0,0.3);
+        }
+        .profile-popup .popup-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .profile-popup .popup-name {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+        .profile-popup .popup-username {
+            font-size: 14px;
+            color: rgba(255,255,255,0.4);
+            margin-bottom: 16px;
+        }
+        .profile-popup .popup-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin: 16px 0;
             padding: 16px 0;
             border-top: 1px solid rgba(255,255,255,0.05);
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
         .profile-popup .popup-stats .stat { text-align: center; }
-        .profile-popup .popup-stats .stat .num { font-size: 22px; font-weight: 700; color: #ffd700; }
-        .profile-popup .popup-stats .stat .label { font-size: 12px; color: rgba(255,255,255,0.5); }
-        .profile-popup .close-popup {
+        .profile-popup .popup-stats .stat .num {
+            font-size: 20px;
+            font-weight: 700;
+            color: #ffd700;
+        }
+        .profile-popup .popup-stats .stat .label {
+            font-size: 10px;
+            color: rgba(255,255,255,0.4);
+            margin-top: 2px;
+        }
+        .profile-popup .popup-close {
             padding: 12px 40px;
-            background: rgba(255,255,255,0.1);
-            border: none;
-            border-radius: 12px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 14px;
             color: white;
             font-size: 16px;
             cursor: pointer;
             transition: background 0.2s;
+            width: 100%;
+            margin-top: 8px;
         }
-        .profile-popup .close-popup:hover { background: rgba(255,255,255,0.2); }
+        .profile-popup .popup-close:hover { background: rgba(255,255,255,0.15); }
+        
         ::-webkit-scrollbar { width: 3px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
-        
-        .loading {
-            text-align: center;
-            padding: 20px;
-            color: rgba(255,255,255,0.4);
-            font-size: 14px;
-        }
     </style>
 </head>
 <body>
     <!-- ===== ВЕРХНЯЯ ПАНЕЛЬ ===== -->
     <div class="top-bar">
-        <div class="left">
-            <div class="profile" id="profileBtn">👤</div>
+        <div class="left" onclick="openProfile()">
+            <div class="profile-avatar" id="avatarContainer">👤</div>
+            <div class="profile-info">
+                <div class="profile-name" id="profileName">Загрузка...</div>
+                <div class="profile-username" id="profileUsername">@username</div>
+            </div>
             <div class="stars-info">
-                ⭐ <strong id="userStars">0</strong> звёзд
+                ⭐ <strong id="userStars">0</strong>
             </div>
         </div>
         <div class="right">
@@ -267,7 +340,7 @@
         </div>
     </div>
     
-    <!-- ===== LIVE ДОРОЖКА ===== -->
+    <!-- ===== LIVE ЛЕНТА ===== -->
     <div class="live-track">
         <span class="live-badge">LIVE</span>
         <div class="track-scroll" id="trackScroll">
@@ -343,15 +416,21 @@
         </button>
     </div>
     
-    <!-- ===== ПРОФИЛЬ ===== -->
+    <!-- ===== ПРОФИЛЬ (ПОПАП) ===== -->
     <div class="profile-popup" id="profilePopup">
         <div class="popup-content">
-            <div class="popup-avatar">👤</div>
+            <div class="popup-avatar" id="popupAvatar">👤</div>
             <div class="popup-name" id="popupName">User</div>
+            <div class="popup-username" id="popupUsername">@username</div>
+            
             <div class="popup-stats">
                 <div class="stat">
-                    <div class="num" id="popupStars">0</div>
-                    <div class="label">⭐ Звёзд</div>
+                    <div class="num" id="popupBalance">0</div>
+                    <div class="label">⭐ Баланс</div>
+                </div>
+                <div class="stat">
+                    <div class="num" id="popupEarned">0</div>
+                    <div class="label">💰 Заработано</div>
                 </div>
                 <div class="stat">
                     <div class="num" id="popupNfts">0</div>
@@ -361,8 +440,13 @@
                     <div class="num" id="popupGifts">0</div>
                     <div class="label">🎁 Гифтов</div>
                 </div>
+                <div class="stat">
+                    <div class="num" id="popupSpent">0</div>
+                    <div class="label">📊 Спинов</div>
+                </div>
             </div>
-            <button class="close-popup" onclick="closeProfile()">Закрыть</button>
+            
+            <button class="popup-close" onclick="closeProfile()">✕ Закрыть</button>
         </div>
     </div>
     
@@ -372,14 +456,9 @@
     <script>
         // ========== TELEGRAM WEB APP ==========
         let tg = window.Telegram?.WebApp;
+        if (tg) { tg.ready(); tg.expand(); tg.enableClosingConfirmation(); }
         
-        if (tg) {
-            tg.ready();
-            tg.expand();
-            tg.enableClosingConfirmation();
-        }
-        
-        // ========== РАСШИРЕНИЕ НА 75% ==========
+        // ========== РАСШИРЕНИЕ ==========
         function expandApp() {
             if (tg) {
                 tg.expand();
@@ -388,7 +467,7 @@
                 document.body.style.maxHeight = height + 'px';
             }
         }
-        window.addEventListener('load', function() { expandApp(); });
+        window.addEventListener('load', expandApp);
         window.addEventListener('resize', function() {
             if (tg) {
                 const height = Math.floor(window.innerHeight * 0.75);
@@ -397,67 +476,60 @@
             }
         });
         
-        // ========== ПОЛЬЗОВАТЕЛЬСКИЕ ДАННЫЕ ==========
+        // ========== ДАННЫЕ ==========
         let userData = {
             stars: 0,
+            totalEarned: 0,
+            totalSpent: 0,
+            giftsReceived: 0,
             nfts: [],
-            giftsReceived: 0
+            nftCount: 0,
+            username: '',
+            firstName: 'User',
+            lastName: '',
+            photoUrl: null
         };
         
-        let currentUserName = 'User';
-        if (tg && tg.initDataUnsafe?.user) {
-            currentUserName = tg.initDataUnsafe.user.first_name || 'User';
-            if (tg.initDataUnsafe.user.last_name) {
-                currentUserName += ' ' + tg.initDataUnsafe.user.last_name;
-            }
-            if (currentUserName.length > 20) {
-                currentUserName = currentUserName.substring(0, 18) + '…';
-            }
-        }
-        
-        // ========== ЗАПРОС ДАННЫХ У БОТА ==========
+        // ========== ЗАПРОС ДАННЫХ ==========
         function fetchUserData() {
             if (tg) {
-                tg.sendData(JSON.stringify({
-                    action: 'get_user_data'
-                }));
+                tg.sendData(JSON.stringify({ action: 'get_user_data' }));
             }
         }
         
         function fetchLiveFeed() {
             if (tg) {
-                tg.sendData(JSON.stringify({
-                    action: 'get_live_feed'
-                }));
+                tg.sendData(JSON.stringify({ action: 'get_live_feed' }));
             }
         }
         
-        // ========== ОБРАБОТКА ОТВЕТОВ ОТ БОТА ==========
-        // Это глобальная функция, которую бот вызывает
+        // ========== ОБРАБОТКА ОТВЕТОВ ==========
         window.handleBotResponse = function(data) {
             try {
-                // Если это пользовательские данные
                 if (data.balance !== undefined) {
                     userData.stars = data.balance;
-                    userData.nfts = data.nfts || [];
+                    userData.totalEarned = data.total_earned || 0;
+                    userData.totalSpent = data.total_spent || 0;
                     userData.giftsReceived = data.gifts_received || 0;
+                    userData.nfts = data.nfts || [];
+                    userData.nftCount = data.nft_count || 0;
+                    userData.username = data.username || '';
+                    userData.firstName = data.first_name || 'User';
+                    userData.lastName = data.last_name || '';
+                    userData.photoUrl = data.photo_url || null;
                     updateUI();
                 }
                 
-                // Если это LIVE лента
                 if (data.live_feed) {
                     updateLiveFeed(data.live_feed);
                 }
                 
-                // Если это результат открытия кейса
                 if (data.status === 'win') {
                     userData.stars = data.balance;
-                    if (data.nft) {
-                        userData.nfts.push(data.nft);
-                    }
+                    if (data.nft) { userData.nfts.push(data.nft); userData.nftCount++; }
                     updateUI();
                     showToast('🎉 Ты выиграл ' + data.nft + '!');
-                    fetchLiveFeed(); // Обновляем LIVE ленту
+                    fetchLiveFeed();
                 } else if (data.status === 'lose') {
                     userData.stars = data.balance;
                     updateUI();
@@ -469,38 +541,53 @@
                 } else if (data.status === 'error') {
                     showToast('❌ ' + data.message);
                 }
-            } catch(e) {
-                console.log('Ошибка обработки ответа:', e);
-            }
+            } catch(e) { console.log('Ошибка:', e); }
         };
         
         // ========== ОБНОВЛЕНИЕ UI ==========
         function updateUI() {
             document.getElementById('userStars').textContent = userData.stars;
-            document.getElementById('popupStars').textContent = userData.stars;
-            document.getElementById('popupNfts').textContent = userData.nfts.length;
+            document.getElementById('profileName').textContent = userData.firstName + (userData.lastName ? ' ' + userData.lastName : '');
+            document.getElementById('profileUsername').textContent = userData.username ? '@' + userData.username : 'Без username';
+            
+            const avatar = document.getElementById('avatarContainer');
+            if (userData.photoUrl) {
+                avatar.innerHTML = '<img src="' + userData.photoUrl + '" alt="avatar">';
+            } else {
+                avatar.textContent = userData.firstName.charAt(0).toUpperCase();
+                avatar.style.background = 'linear-gradient(135deg, #f7971e, #ffd200)';
+            }
+            
+            // Попап
+            document.getElementById('popupName').textContent = userData.firstName + (userData.lastName ? ' ' + userData.lastName : '');
+            document.getElementById('popupUsername').textContent = userData.username ? '@' + userData.username : 'Без username';
+            document.getElementById('popupBalance').textContent = userData.stars;
+            document.getElementById('popupEarned').textContent = userData.totalEarned;
+            document.getElementById('popupNfts').textContent = userData.nftCount;
             document.getElementById('popupGifts').textContent = userData.giftsReceived;
-            document.getElementById('popupName').textContent = currentUserName;
+            document.getElementById('popupSpent').textContent = userData.totalSpent;
+            
+            const popupAvatar = document.getElementById('popupAvatar');
+            if (userData.photoUrl) {
+                popupAvatar.innerHTML = '<img src="' + userData.photoUrl + '" alt="avatar">';
+            } else {
+                popupAvatar.textContent = userData.firstName.charAt(0).toUpperCase();
+            }
         }
         
-        // ========== ОБНОВЛЕНИЕ LIVE ЛЕНТЫ ==========
+        // ========== LIVE ЛЕНТА ==========
         function updateLiveFeed(events) {
             const scroll = document.getElementById('trackScroll');
             scroll.innerHTML = '';
-            
             if (events && events.length > 0) {
-                events.forEach(function(event) {
+                events.forEach(function(e) {
                     const span = document.createElement('span');
                     span.className = 'item';
-                    span.innerHTML = '🎉 <span class="win">' + event.user_name + '</span> выиграл <span class="nft">' + event.nft_id + '</span>';
+                    span.innerHTML = '🎉 <span class="win">' + e.user_name + '</span> выиграл <span class="nft">' + e.nft_id + '</span>';
                     scroll.appendChild(span);
                 });
-                
-                // Дублируем для бесконечной прокрутки
-                const items = scroll.innerHTML;
-                scroll.innerHTML = items + items;
+                scroll.innerHTML = scroll.innerHTML + scroll.innerHTML;
             } else {
-                // Если нет событий
                 const span = document.createElement('span');
                 span.className = 'item';
                 span.textContent = '🎉 Ожидаем первых победителей...';
@@ -515,7 +602,6 @@
                 showToast('❌ Не хватает звёзд! Нужно: ' + price);
                 return;
             }
-            
             if (tg) {
                 tg.sendData(JSON.stringify({
                     action: 'open_case',
@@ -525,16 +611,13 @@
             }
         }
         
-        // ========== ДОБАВИТЬ ЗВЁЗДЫ (ТЕСТ) ==========
+        // ========== ДОБАВИТЬ ЗВЁЗДЫ ==========
         function addStars() {
             if (tg) {
-                tg.sendData(JSON.stringify({
-                    action: 'get_gift'
-                }));
+                tg.sendData(JSON.stringify({ action: 'get_gift' }));
             }
         }
         
-        // ========== ПОКУПКА ЗВЁЗД ==========
         function buyStars() {
             showToast('🛒 Скоро здесь будет магазин звёзд!');
         }
@@ -552,20 +635,14 @@
         document.getElementById('profilePopup').addEventListener('click', function(e) {
             if (e.target === this) closeProfile();
         });
-        document.getElementById('profileBtn').addEventListener('click', openProfile);
         
         // ========== ВКЛАДКИ ==========
         document.querySelectorAll('.tab').forEach(tab => {
             tab.addEventListener('click', function() {
                 document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
                 this.classList.add('active');
-                
-                const tabName = this.dataset.tab;
-                if (tabName === 'profile') {
-                    openProfile();
-                } else if (tabName === 'modes') {
-                    showToast('⚡ Режимы скоро появятся!');
-                }
+                if (this.dataset.tab === 'profile') openProfile();
+                else if (this.dataset.tab === 'modes') showToast('⚡ Режимы скоро появятся!');
             });
         });
         
@@ -574,48 +651,29 @@
             const toast = document.getElementById('toast');
             toast.textContent = message;
             toast.classList.add('show');
-            
             clearTimeout(toast._timeout);
-            toast._timeout = setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
+            toast._timeout = setTimeout(() => toast.classList.remove('show'), 3000);
         }
         
-        // ========== ПЕРЕХВАТ СООБЩЕНИЙ ОТ БОТА ==========
-        // Telegram отправляет ответы от бота как обычные сообщения
-        // Мы перехватываем их и обрабатываем
+        // ========== ПЕРЕХВАТ СООБЩЕНИЙ ==========
         if (tg) {
-            // Сохраняем оригинальный обработчик
-            const originalOnEvent = tg.onEvent;
-            
-            // Переопределяем обработчик событий
             tg.onEvent('message', function(message) {
                 try {
                     const data = JSON.parse(message.text);
-                    if (typeof data === 'object') {
-                        window.handleBotResponse(data);
-                        return;
-                    }
-                } catch(e) {
-                    // Это не JSON, игнорируем
-                }
+                    if (typeof data === 'object') window.handleBotResponse(data);
+                } catch(e) {}
             });
         }
         
         // ========== ИНИЦИАЛИЗАЦИЯ ==========
-        // Запрашиваем данные при загрузке
         setTimeout(function() {
             fetchUserData();
             fetchLiveFeed();
         }, 500);
         
-        // Обновляем LIVE ленту каждые 30 секунд
-        setInterval(function() {
-            fetchLiveFeed();
-        }, 30000);
+        setInterval(fetchLiveFeed, 30000);
         
         console.log('Easy Gift Mini App loaded!');
-        console.log('Пользователь:', currentUserName);
     </script>
 </body>
 </html>
