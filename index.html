@@ -5,12 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Easy Gift</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         html, body {
             width: 100%;
             min-height: 100vh;
@@ -19,14 +14,12 @@
             color: white;
             overflow-x: hidden;
         }
-        
         body {
             height: 75vh;
             max-height: 75vh;
             overflow-y: auto;
             border-radius: 20px 20px 0 0;
         }
-        
         .top-bar {
             display: flex;
             justify-content: space-between;
@@ -39,47 +32,18 @@
             z-index: 100;
             backdrop-filter: blur(10px);
         }
-        
-        .top-bar .left {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
+        .top-bar .left { display: flex; align-items: center; gap: 10px; }
         .top-bar .profile {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
+            width: 36px; height: 36px; border-radius: 50%;
             background: linear-gradient(135deg, #f7971e, #ffd200);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 16px;
-            color: #000;
-            cursor: pointer;
-            transition: transform 0.2s;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 16px; color: #000;
+            cursor: pointer; transition: transform 0.2s;
         }
-        
-        .top-bar .profile:hover {
-            transform: scale(1.05);
-        }
-        
-        .top-bar .stars-info {
-            font-size: 14px;
-            color: rgba(255,255,255,0.8);
-        }
-        
-        .top-bar .stars-info strong {
-            color: #ffd700;
-        }
-        
-        .top-bar .right {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
+        .top-bar .profile:hover { transform: scale(1.05); }
+        .top-bar .stars-info { font-size: 14px; color: rgba(255,255,255,0.8); }
+        .top-bar .stars-info strong { color: #ffd700; }
+        .top-bar .right { display: flex; align-items: center; gap: 8px; }
         .top-bar .icon-btn {
             background: rgba(255,255,255,0.08);
             border: 1px solid rgba(255,255,255,0.1);
@@ -93,17 +57,9 @@
             gap: 4px;
             transition: background 0.2s;
         }
+        .top-bar .icon-btn:hover { background: rgba(255,255,255,0.15); }
+        .top-bar .icon-btn .plus { color: #ffd700; font-weight: 700; }
         
-        .top-bar .icon-btn:hover {
-            background: rgba(255,255,255,0.15);
-        }
-        
-        .top-bar .icon-btn .plus {
-            color: #ffd700;
-            font-weight: 700;
-        }
-        
-        /* ===== LIVE ДОРОЖКА ===== */
         .live-track {
             padding: 10px 16px;
             background: rgba(255,215,0,0.03);
@@ -114,7 +70,6 @@
             align-items: center;
             gap: 8px;
         }
-        
         .live-track .live-badge {
             display: inline-block;
             background: #ff0040;
@@ -127,13 +82,7 @@
             flex-shrink: 0;
             animation: pulse 1.5s infinite;
         }
-        
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.3; }
-            100% { opacity: 1; }
-        }
-        
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
         .live-track .track-scroll {
             display: flex;
             gap: 40px;
@@ -142,39 +91,18 @@
             font-size: 13px;
             color: rgba(255,255,255,0.7);
         }
+        .live-track .track-scroll .item { display: inline-block; }
+        .live-track .track-scroll .item .win { color: #ffd700; font-weight: 600; }
+        .live-track .track-scroll .item .nft { color: #00d4ff; font-weight: 600; }
+        @keyframes scrollTrack { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         
-        .live-track .track-scroll .item {
-            display: inline-block;
-        }
-        
-        .live-track .track-scroll .item .win {
-            color: #ffd700;
-            font-weight: 600;
-        }
-        
-        .live-track .track-scroll .item .nft {
-            color: #00d4ff;
-            font-weight: 600;
-        }
-        
-        @keyframes scrollTrack {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-        
-        /* ===== КОНТЕНТ ===== */
-        .content {
-            padding: 16px;
-            padding-bottom: 80px;
-        }
-        
+        .content { padding: 16px; padding-bottom: 80px; }
         .cases-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 10px;
             margin-top: 12px;
         }
-        
         .case-item {
             background: rgba(255,255,255,0.03);
             border: 1px solid rgba(255,255,255,0.05);
@@ -184,25 +112,17 @@
             transition: transform 0.2s, border-color 0.2s;
             cursor: pointer;
         }
-        
-        .case-item:hover {
-            transform: scale(1.03);
-            border-color: rgba(255,215,0,0.3);
-        }
-        
+        .case-item:hover { transform: scale(1.03); border-color: rgba(255,215,0,0.3); }
         .case-item .case-icon { font-size: 28px; margin-bottom: 4px; }
         .case-item .case-name { font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.9); }
         .case-item .case-price { font-size: 10px; color: #ffd700; margin-top: 2px; }
-        
         .case-item .case-progress {
-            width: 100%;
-            height: 3px;
+            width: 100%; height: 3px;
             background: rgba(255,255,255,0.05);
             border-radius: 3px;
             margin-top: 6px;
             overflow: hidden;
         }
-        
         .case-item .case-progress .fill {
             height: 100%;
             background: linear-gradient(90deg, #f7971e, #ffd200);
@@ -210,7 +130,6 @@
             transition: width 0.5s;
         }
         
-        /* ===== НИЖНЯЯ ПАНЕЛЬ ===== */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -226,7 +145,6 @@
             padding-bottom: env(safe-area-inset-bottom, 6px);
             z-index: 200;
         }
-        
         .bottom-nav .tab {
             display: flex;
             flex-direction: column;
@@ -235,20 +153,17 @@
             cursor: pointer;
             padding: 4px 16px;
             border-radius: 12px;
-            transition: background 0.2s;
             background: transparent;
             border: none;
             color: rgba(255,255,255,0.4);
             font-size: 10px;
             font-weight: 500;
         }
-        
         .bottom-nav .tab.active { color: #ffd700; }
         .bottom-nav .tab .icon { font-size: 20px; }
         .bottom-nav .tab .label { font-size: 9px; }
         .bottom-nav .tab:hover { background: rgba(255,255,255,0.05); }
         
-        /* ===== TOAST ===== */
         .toast {
             position: fixed;
             bottom: 80px;
@@ -265,15 +180,9 @@
             max-width: 90%;
             text-align: center;
         }
-        
         .toast.show { display: block; animation: slideUp 0.3s ease; }
+        @keyframes slideUp { from { transform: translateX(-50%) translateY(20px); opacity: 0; } to { transform: translateX(-50%) translateY(0); opacity: 1; } }
         
-        @keyframes slideUp {
-            from { transform: translateX(-50%) translateY(20px); opacity: 0; }
-            to { transform: translateX(-50%) translateY(0); opacity: 1; }
-        }
-        
-        /* ===== ПРОФИЛЬ ===== */
         .profile-popup {
             position: fixed;
             top: 0;
@@ -287,9 +196,7 @@
             justify-content: center;
             align-items: center;
         }
-        
         .profile-popup.show { display: flex; }
-        
         .profile-popup .popup-content {
             background: linear-gradient(145deg, #1a1a2e, #2a2a4a);
             border-radius: 24px;
@@ -299,23 +206,14 @@
             text-align: center;
             border: 1px solid rgba(255,255,255,0.05);
         }
-        
         .profile-popup .popup-avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
+            width: 80px; height: 80px; border-radius: 50%;
             background: linear-gradient(135deg, #f7971e, #ffd200);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            font-weight: 700;
-            color: #000;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 32px; font-weight: 700; color: #000;
             margin: 0 auto 16px;
         }
-        
         .profile-popup .popup-name { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
-        
         .profile-popup .popup-stats {
             display: flex;
             justify-content: space-around;
@@ -324,11 +222,9 @@
             border-top: 1px solid rgba(255,255,255,0.05);
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
-        
         .profile-popup .popup-stats .stat { text-align: center; }
         .profile-popup .popup-stats .stat .num { font-size: 22px; font-weight: 700; color: #ffd700; }
         .profile-popup .popup-stats .stat .label { font-size: 12px; color: rgba(255,255,255,0.5); }
-        
         .profile-popup .close-popup {
             padding: 12px 40px;
             background: rgba(255,255,255,0.1);
@@ -339,12 +235,17 @@
             cursor: pointer;
             transition: background 0.2s;
         }
-        
         .profile-popup .close-popup:hover { background: rgba(255,255,255,0.2); }
-        
         ::-webkit-scrollbar { width: 3px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: rgba(255,255,255,0.4);
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
@@ -353,7 +254,7 @@
         <div class="left">
             <div class="profile" id="profileBtn">👤</div>
             <div class="stars-info">
-                ⭐ <strong id="userStars">5</strong> звёзд
+                ⭐ <strong id="userStars">0</strong> звёзд
             </div>
         </div>
         <div class="right">
@@ -366,16 +267,16 @@
         </div>
     </div>
     
-    <!-- ===== LIVE ДОРОЖКА (РЕАЛЬНЫЕ ЛЮДИ) ===== -->
+    <!-- ===== LIVE ДОРОЖКА ===== -->
     <div class="live-track">
         <span class="live-badge">LIVE</span>
         <div class="track-scroll" id="trackScroll">
-            <span class="item">🎉 <span class="win">Ожидаем первого победителя...</span></span>
-            <span class="item">🎉 <span class="win">Ожидаем первого победителя...</span></span>
-            <span class="item">🎉 <span class="win">Ожидаем первого победителя...</span></span>
-            <span class="item">🎉 <span class="win">Ожидаем первого победителя...</span></span>
-            <span class="item">🎉 <span class="win">Ожидаем первого победителя...</span></span>
-            <span class="item">🎉 <span class="win">Ожидаем первого победителя...</span></span>
+            <span class="item">🎉 Ожидаем первых победителей...</span>
+            <span class="item">🎉 Ожидаем первых победителей...</span>
+            <span class="item">🎉 Ожидаем первых победителей...</span>
+            <span class="item">🎉 Ожидаем первых победителей...</span>
+            <span class="item">🎉 Ожидаем первых победителей...</span>
+            <span class="item">🎉 Ожидаем первых победителей...</span>
         </div>
     </div>
     
@@ -420,234 +321,4 @@
             <div class="case-item" onclick="openCase('Star Pack', 1)">
                 <div class="case-icon">🌟</div>
                 <div class="case-name">Star Pack</div>
-                <div class="case-price">⭐ 1 / 50</div>
-                <div class="case-progress"><div class="fill" style="width:2%"></div></div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- ===== НИЖНЯЯ ПАНЕЛЬ ===== -->
-    <div class="bottom-nav">
-        <button class="tab active" data-tab="cases">
-            <span class="icon">📦</span>
-            <span class="label">Кейсы</span>
-        </button>
-        <button class="tab" data-tab="modes">
-            <span class="icon">⚡</span>
-            <span class="label">Режимы</span>
-        </button>
-        <button class="tab" data-tab="profile">
-            <span class="icon">👤</span>
-            <span class="label">Профиль</span>
-        </button>
-    </div>
-    
-    <!-- ===== ПРОФИЛЬ ===== -->
-    <div class="profile-popup" id="profilePopup">
-        <div class="popup-content">
-            <div class="popup-avatar">👤</div>
-            <div class="popup-name" id="popupName">User</div>
-            <div class="popup-stats">
-                <div class="stat">
-                    <div class="num" id="popupStars">5</div>
-                    <div class="label">⭐ Звёзд</div>
-                </div>
-                <div class="stat">
-                    <div class="num" id="popupNfts">0</div>
-                    <div class="label">🖼 NFT</div>
-                </div>
-                <div class="stat">
-                    <div class="num" id="popupGifts">0</div>
-                    <div class="label">🎁 Гифтов</div>
-                </div>
-            </div>
-            <button class="close-popup" onclick="closeProfile()">Закрыть</button>
-        </div>
-    </div>
-    
-    <!-- ===== TOAST ===== -->
-    <div class="toast" id="toast"></div>
-    
-    <script>
-        // ========== TELEGRAM WEB APP ==========
-        let tg = window.Telegram?.WebApp;
-        
-        if (tg) {
-            tg.ready();
-            tg.expand();
-            tg.enableClosingConfirmation();
-        }
-        
-        // ========== РАСШИРЕНИЕ НА 75% ==========
-        function expandApp() {
-            if (tg) {
-                tg.expand();
-                const height = Math.floor(window.innerHeight * 0.75);
-                document.body.style.height = height + 'px';
-                document.body.style.maxHeight = height + 'px';
-            }
-        }
-        
-        window.addEventListener('load', function() { expandApp(); });
-        window.addEventListener('resize', function() {
-            if (tg) {
-                const height = Math.floor(window.innerHeight * 0.75);
-                document.body.style.height = height + 'px';
-                document.body.style.maxHeight = height + 'px';
-            }
-        });
-        
-        // ========== ПОЛЬЗОВАТЕЛЬСКИЕ ДАННЫЕ ==========
-        let userData = {
-            stars: 5,
-            nfts: [],
-            giftsReceived: 0,
-            spins: 0
-        };
-        
-        // ========== ИМЯ РЕАЛЬНОГО ПОЛЬЗОВАТЕЛЯ ==========
-        let currentUserName = 'User';
-        
-        // Получаем имя из Telegram
-        if (tg && tg.initDataUnsafe?.user) {
-            currentUserName = tg.initDataUnsafe.user.first_name || 'User';
-            // Если есть фамилия — добавляем
-            if (tg.initDataUnsafe.user.last_name) {
-                currentUserName += ' ' + tg.initDataUnsafe.user.last_name;
-            }
-            // Обрезаем длинные имена
-            if (currentUserName.length > 20) {
-                currentUserName = currentUserName.substring(0, 18) + '…';
-            }
-        }
-        
-        // ========== ОБНОВЛЕНИЕ UI ==========
-        function updateUI() {
-            document.getElementById('userStars').textContent = userData.stars;
-            document.getElementById('popupStars').textContent = userData.stars;
-            document.getElementById('popupNfts').textContent = userData.nfts.length;
-            document.getElementById('popupGifts').textContent = userData.giftsReceived;
-            document.getElementById('popupName').textContent = currentUserName;
-        }
-        
-        // ========== LIVE ДОРОЖКА — ДОБАВЛЕНИЕ РЕАЛЬНОГО СОБЫТИЯ ==========
-        function addRealWin(userName, nftId) {
-            const scroll = document.getElementById('trackScroll');
-            const span = document.createElement('span');
-            span.className = 'item';
-            span.innerHTML = '🎉 <span class="win">' + userName + '</span> выиграл <span class="nft">' + nftId + '</span>';
-            scroll.appendChild(span);
-            
-            // Удаляем старые
-            while (scroll.children.length > 30) {
-                scroll.removeChild(scroll.firstChild);
-            }
-        }
-        
-        // ========== ОТКРЫТИЕ КЕЙСА ==========
-        function openCase(caseName, price) {
-            if (userData.stars < price) {
-                showToast('❌ Не хватает звёзд! Нужно: ' + price);
-                return;
-            }
-            
-            userData.stars -= price;
-            
-            // Шанс выигрыша NFT — 10%
-            const win = Math.random() < 0.1;
-            let result = '';
-            
-            if (win) {
-                const nftId = 'NFT#' + Math.floor(Math.random() * 90000 + 10000);
-                userData.nfts.push(nftId);
-                result = '🎉 ПОБЕДА! Ты выиграл ' + nftId + '!';
-                
-                // Добавляем в LIVE ленту (РЕАЛЬНЫЙ пользователь!)
-                addRealWin(currentUserName, nftId);
-                
-                // Отправляем в бота
-                if (tg) {
-                    try {
-                        tg.sendData(JSON.stringify({
-                            action: 'win_nft',
-                            user: currentUserName,
-                            nft: nftId,
-                            case: caseName
-                        }));
-                    } catch (e) { console.log(e); }
-                }
-            } else {
-                result = '😞 Не повезло! Попробуй ещё!';
-            }
-            
-            updateUI();
-            showToast(result);
-        }
-        
-        // ========== ДОБАВИТЬ ЗВЁЗДЫ ==========
-        function addStars() {
-            userData.stars += 1;
-            updateUI();
-            showToast('⭐ +1 звезда!');
-        }
-        
-        // ========== ПОКУПКА ЗВЁЗД ==========
-        function buyStars() {
-            showToast('🛒 Скоро здесь будет магазин звёзд!');
-        }
-        
-        // ========== ПРОФИЛЬ ==========
-        function openProfile() {
-            document.getElementById('profilePopup').classList.add('show');
-            updateUI();
-        }
-        
-        function closeProfile() {
-            document.getElementById('profilePopup').classList.remove('show');
-        }
-        
-        document.getElementById('profilePopup').addEventListener('click', function(e) {
-            if (e.target === this) closeProfile();
-        });
-        document.getElementById('profileBtn').addEventListener('click', openProfile);
-        
-        // ========== ВКЛАДКИ ==========
-        document.querySelectorAll('.tab').forEach(tab => {
-            tab.addEventListener('click', function() {
-                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-                this.classList.add('active');
-                
-                const tabName = this.dataset.tab;
-                if (tabName === 'profile') {
-                    openProfile();
-                } else if (tabName === 'modes') {
-                    showToast('⚡ Режимы скоро появятся!');
-                }
-            });
-        });
-        
-        // ========== TOAST ==========
-        function showToast(message) {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.classList.add('show');
-            
-            clearTimeout(toast._timeout);
-            toast._timeout = setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
-        }
-        
-        // ========== ИНИЦИАЛИЗАЦИЯ ==========
-        updateUI();
-        
-        // Добавляем тестовое сообщение о старте
-        setTimeout(() => {
-            addRealWin(currentUserName, '⭐ ' + userData.stars + ' звёзд на старте!');
-        }, 2000);
-        
-        console.log('Easy Gift Mini App loaded!');
-        console.log('Пользователь:', currentUserName);
-    </script>
-</body>
-</html>
+                <div class="case-price">⭐ 
